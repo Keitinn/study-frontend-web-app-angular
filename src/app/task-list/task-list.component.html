@@ -2,6 +2,7 @@
   <mat-list-option
     *ngFor="let task of taskManager.getTasks()"
     [(selected)]="task.isCompleted"
+    (selectedChange)="taskManager.saveTasks()"
   >
     {{ task.name }}
   </mat-list-option>
