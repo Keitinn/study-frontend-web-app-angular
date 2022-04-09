@@ -14,14 +14,6 @@ const routes: Routes = [
     path: 'add',
     component: TaskEditComponent,
   },
-  {
-    path: 'csv/export',
-    component: CsvExportComponent,
-  },
-  {
-    path: 'csv/import',
-    component: CsvImportComponent,
-  },
 ];
 
 @NgModule({
