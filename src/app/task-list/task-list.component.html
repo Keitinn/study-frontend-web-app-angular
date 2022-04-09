@@ -1,0 +1,12 @@
+<mat-selection-list>
+  <mat-list-option
+    *ngFor="let task of taskManager.getTasks()"
+    [(selected)]="task.isCompleted"
+  >
+    {{ task.name }}
+  </mat-list-option>
+</mat-selection-list>
+
+<button class="add-button" routerLink="/add" mat-fab color="primary">
+  <mat-icon>add</mat-icon>
+</button>
