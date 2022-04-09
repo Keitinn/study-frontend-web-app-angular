@@ -10,3 +10,12 @@
 <button class="add-button" routerLink="/add" mat-fab color="primary">
   <mat-icon>add</mat-icon>
 </button>
+
+<button
+  class="delete-button"
+  (click)="taskManager.deleteTasks()"
+  mat-fab
+  color="Warn"
+>
+  <mat-icon>delete</mat-icon>
+</button>

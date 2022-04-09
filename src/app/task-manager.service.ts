@@ -45,4 +45,9 @@ export class TaskManagerService {
     }
     return cnt;
   }
+
+  // チェックされているタスクを削除
+  deleteTasks() {
+    this.tasks = this.tasks.filter((task) => !task.isCompleted);
+  }
 }
