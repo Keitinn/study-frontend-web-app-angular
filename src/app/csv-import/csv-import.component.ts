@@ -59,8 +59,8 @@ export class CsvImportComponent implements OnInit {
         }
       }
       this.taskManager.saveTasks();
-      reader.readAsText(file);
     };
+    reader.readAsText(file);
   }
 
   // 引数のタスク名と同一のタスクの配列内のインデックスを返す
