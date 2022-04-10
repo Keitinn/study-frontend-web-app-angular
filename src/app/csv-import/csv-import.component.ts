@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskManagerService } from '../task-manager.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { TaskManagerService } from '../task-manager.service';
   styleUrls: ['./csv-import.component.scss'],
 })
 export class CsvImportComponent implements OnInit {
-  constructor(public taskManager: TaskManagerService) {}
+  constructor(
+    public taskManager: TaskManagerService,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
@@ -59,6 +63,9 @@ export class CsvImportComponent implements OnInit {
         }
       }
       this.taskManager.saveTasks();
+      this.snackBar.open('CSV取込しました。', undefined, {
+        duration: 1000,
+      });
     };
     reader.readAsText(file);
   }

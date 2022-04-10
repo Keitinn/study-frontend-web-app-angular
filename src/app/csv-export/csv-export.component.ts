@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskManagerService } from '../task-manager.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { TaskManagerService } from '../task-manager.service';
   styleUrls: ['./csv-export.component.scss'],
 })
 export class CsvExportComponent implements OnInit {
-  constructor(public taskManager: TaskManagerService) {}
+  constructor(
+    public taskManager: TaskManagerService,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
   csvExport() {
@@ -47,5 +51,8 @@ export class CsvExportComponent implements OnInit {
       //createObjectURLで作成したオブジェクトURLを開放する
       (window.URL || window.webkitURL).revokeObjectURL(url);
     }
+    this.snackBar.open('CSV出力しました。', undefined, {
+      duration: 1000,
+    });
   }
 }
