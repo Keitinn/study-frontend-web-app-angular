@@ -49,5 +49,6 @@ export class TaskManagerService {
   // チェックされているタスクを削除
   deleteTasks() {
     this.tasks = this.tasks.filter((task) => !task.isCompleted);
+    this.saveTasks();
   }
 }

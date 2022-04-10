@@ -1,1 +1,13 @@
-<p>csv-import works!</p>
+<button class="csv-import-button" onclick="file.click()" mat-fab color="Basic">
+  <mat-icon>file_upload</mat-icon>
+</button>
+<form id="importForm" style="display: none">
+  <input
+    id="file"
+    type="file"
+    name="file"
+    accept=".csv"
+    #fileInput
+    (change)="onChange($event)"
+  />
+</form>
