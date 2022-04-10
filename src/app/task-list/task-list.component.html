@@ -5,6 +5,13 @@
     (selectedChange)="taskManager.saveTasks()"
   >
     {{ task.name }}
+    <button
+      mat-raised-button
+      routerLink="/edit/{{ task.name }}"
+      class="edit-button"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
   </mat-list-option>
 </mat-selection-list>
 

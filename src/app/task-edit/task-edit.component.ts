@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TaskManagerService } from '../task-manager.service';
 
 @Component({
@@ -8,12 +8,26 @@ import { TaskManagerService } from '../task-manager.service';
   styleUrls: ['./task-edit.component.scss'],
 })
 export class TaskEditComponent implements OnInit {
-  constructor(public taskManager: TaskManagerService, private router: Router) {}
+  constructor(
+    public taskManager: TaskManagerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  editTaskName: string | undefined = undefined;
 
-  addTask(taskName: string) {
-    this.taskManager.addTask(taskName);
+  ngOnInit(): void {
+    this.editTaskName = this.route.snapshot.paramMap
+      .get('taskName')
+      ?.toString();
+  }
+
+  saveTask(taskName: string) {
+    if (this.editTaskName) {
+      this.taskManager.updateTask(this.editTaskName, taskName);
+    } else {
+      this.taskManager.addTask(taskName);
+    }
     this.router.navigate(['']);
   }
 }

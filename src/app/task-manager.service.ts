@@ -35,6 +35,16 @@ export class TaskManagerService {
     window.localStorage.setItem('tasks', jsonString);
   }
 
+  updateTask(taskName: string, newName: string) {
+    for (let task of this.tasks) {
+      if (task.name == taskName) {
+        task.name = newName;
+        break;
+      }
+    }
+    this.saveTasks();
+  }
+
   // 完了しているタスク数を返す
   getNumOfCompletedTasks() {
     let cnt = 0;
