@@ -20,6 +20,10 @@ export class TaskEditComponent implements OnInit {
     this.editTaskName = this.route.snapshot.paramMap
       .get('taskName')
       ?.toString();
+    const textFormElm: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById('addTaskNameInput')
+    );
+    textFormElm.focus();
   }
 
   saveTask(taskName: string) {

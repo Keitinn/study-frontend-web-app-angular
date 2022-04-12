@@ -3,7 +3,12 @@
 <form (ngSubmit)="saveTask(addTaskNameInput.value)">
   <mat-form-field appearance="outline" style="width: 100%">
     <mat-label>タスクを入力</mat-label>
-    <input matInput name="add_task_name" #addTaskNameInput />
+    <input
+      matInput
+      name="add_task_name"
+      #addTaskNameInput
+      id="addTaskNameInput"
+    />
   </mat-form-field>
   <button color="primary" mat-raised-button aria-label="登録">
     <span>保存&nbsp;&nbsp;&nbsp;&nbsp;</span>
