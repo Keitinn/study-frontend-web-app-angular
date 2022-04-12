@@ -11,12 +11,25 @@ export class TaskManagerService {
     this.loadTasks();
   }
 
-  addTask(taskName: string) {
+  addTask(taskName: string): boolean {
+    if (!taskName) {
+      alert('タスク名が設定されていません。');
+      return false;
+    }
+
+    for (let task of this.tasks) {
+      if (task.name == taskName) {
+        alert('すでに登録済みです');
+        return false;
+      }
+    }
+
     this.tasks.push({
       name: taskName,
       isCompleted: false,
     });
     this.saveTasks();
+    return true;
   }
 
   getTasks() {
@@ -35,6 +48,7 @@ export class TaskManagerService {
     window.localStorage.setItem('tasks', jsonString);
   }
 
+  // タスクを更新する
   updateTask(taskName: string, newName: string) {
     for (let task of this.tasks) {
       if (task.name == taskName) {

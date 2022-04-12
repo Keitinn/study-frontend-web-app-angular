@@ -25,9 +25,11 @@ export class TaskEditComponent implements OnInit {
   saveTask(taskName: string) {
     if (this.editTaskName) {
       this.taskManager.updateTask(this.editTaskName, taskName);
+      this.router.navigate(['']);
     } else {
-      this.taskManager.addTask(taskName);
+      if (this.taskManager.addTask(taskName)) {
+        this.router.navigate(['']);
+      }
     }
-    this.router.navigate(['']);
   }
 }
