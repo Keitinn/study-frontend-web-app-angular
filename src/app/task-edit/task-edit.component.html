@@ -1,4 +1,5 @@
 <p *ngIf="editTaskName != undefined">{{ editTaskName }}を編集中</p>
+<p *ngIf="parentTaskName != undefined">{{ parentTaskName }}の子タスク</p>
 
 <form (ngSubmit)="saveTask(addTaskNameInput.value)">
   <mat-form-field appearance="outline" style="width: 100%">

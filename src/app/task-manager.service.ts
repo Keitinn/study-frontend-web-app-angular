@@ -27,6 +27,7 @@ export class TaskManagerService {
     this.tasks.push({
       name: taskName,
       isCompleted: false,
+      parentTaskName: '',
     });
     this.saveTasks();
     return true;
@@ -34,6 +35,16 @@ export class TaskManagerService {
 
   getTasks() {
     return this.tasks;
+  }
+
+  getChildTasks(parentTaskName: string) {
+    let chidTasks: TodoTask[] = [];
+    for (let task of this.tasks) {
+      if (task.parentTaskName == parentTaskName) {
+        chidTasks.push(task);
+      }
+    }
+    return chidTasks;
   }
 
   loadTasks() {
@@ -57,6 +68,19 @@ export class TaskManagerService {
       }
     }
     this.saveTasks();
+  }
+
+  // 子タスクを追加する
+  addChildTask(parentTaskName: string, childTaskName: string) {
+    if (!childTaskName) {
+      alert('タスク名が設定されていません。');
+      return;
+    }
+    this.tasks.push({
+      name: childTaskName,
+      isCompleted: false,
+      parentTaskName: parentTaskName,
+    });
   }
 
   // 完了しているタスク数を返す

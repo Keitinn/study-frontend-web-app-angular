@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskManagerService } from '../task-manager.service';
 
@@ -7,28 +13,36 @@ import { TaskManagerService } from '../task-manager.service';
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.scss'],
 })
-export class TaskEditComponent implements OnInit {
+export class TaskEditComponent implements OnInit, AfterViewInit {
+  @ViewChild('addTaskNameInput')
+  addTaskNameInput!: ElementRef;
   constructor(
     public taskManager: TaskManagerService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  ngAfterViewInit(): void {
+    this.addTaskNameInput.nativeElement.focus();
+  }
 
   editTaskName: string | undefined = undefined;
+  parentTaskName: string | undefined = undefined;
 
   ngOnInit(): void {
     this.editTaskName = this.route.snapshot.paramMap
-      .get('taskName')
+      .get('editTaskName')
       ?.toString();
-    const textFormElm: HTMLInputElement = <HTMLInputElement>(
-      document.getElementById('addTaskNameInput')
-    );
-    textFormElm.focus();
+    this.parentTaskName = this.route.snapshot.paramMap
+      .get('parentTaskName')
+      ?.toString();
   }
 
   saveTask(taskName: string) {
     if (this.editTaskName) {
       this.taskManager.updateTask(this.editTaskName, taskName);
+      this.router.navigate(['']);
+    } else if (this.parentTaskName) {
+      this.taskManager.addChildTask(this.parentTaskName, taskName);
       this.router.navigate(['']);
     } else {
       if (this.taskManager.addTask(taskName)) {

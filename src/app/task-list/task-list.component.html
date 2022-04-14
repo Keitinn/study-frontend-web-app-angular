@@ -1,18 +1,38 @@
+<p>
+  {{ taskManager.getNumOfCompletedTasks() }} /
+  {{ taskManager.getTasks().length }} 件
+</p>
 <mat-selection-list>
-  <mat-list-option
-    *ngFor="let task of taskManager.getTasks()"
-    [(selected)]="task.isCompleted"
-    (selectedChange)="taskManager.saveTasks()"
-  >
-    {{ task.name }}
-    <button
-      mat-raised-button
-      routerLink="/edit/{{ task.name }}"
-      class="edit-button"
+  <ng-container *ngFor="let task of taskManager.getTasks()">
+    <mat-list-option
+      *ngIf="!task.parentTaskName"
+      [(selected)]="task.isCompleted"
+      (selectedChange)="taskManager.saveTasks()"
     >
-      <mat-icon>edit</mat-icon>
-    </button>
-  </mat-list-option>
+      {{ task.name }}
+      <div>
+        <button
+          mat-raised-button
+          routerLink="/edit/{{ task.name }}"
+          class="edit-button"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          routerLink="/add-child/{{ task.name }}"
+          class="add-child-button"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-list-option>
+    <mat-list-option
+      *ngFor="let childTask of taskManager.getChildTasks(task.name)"
+    >
+      {{ childTask.name }}
+    </mat-list-option>
+  </ng-container>
 </mat-selection-list>
 
 <button class="add-button" routerLink="/add" mat-fab color="primary">

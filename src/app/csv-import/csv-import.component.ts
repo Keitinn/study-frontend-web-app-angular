@@ -51,6 +51,7 @@ export class CsvImportComponent implements OnInit {
         let task = {
           name: taskArray[0],
           isCompleted: isCompleted,
+          parentTaskName: '',
         };
         if (task.name == 'タスク名') {
           continue;

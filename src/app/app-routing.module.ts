@@ -15,7 +15,11 @@ const routes: Routes = [
     component: TaskEditComponent,
   },
   {
-    path: 'edit/:taskName',
+    path: 'edit/:editTaskName',
+    component: TaskEditComponent,
+  },
+  {
+    path: 'add-child/:parentTaskName',
     component: TaskEditComponent,
   },
 ];

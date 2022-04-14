@@ -24,7 +24,26 @@
 
 .edit-button {
   position: absolute;
+  right: 10rem;
+  bottom: 4px;
+  top: 4px;
+}
+
+.add-child-button {
+  position: absolute;
   right: 4rem;
   bottom: 4px;
   top: 4px;
+}
+
+p {
+  font-size: medium;
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
