@@ -9,6 +9,9 @@
       [(selected)]="task.isCompleted"
     >
       {{ task.name }}
+      <ng-container *ngIf="task.dueDate">
+        <span id="dueDate">({{ task.dueDate | date: "YYYY/MM/dd" }})</span>
+      </ng-container>
       <div>
         <button
           mat-raised-button
@@ -31,6 +34,11 @@
     >
       <mat-list-option [(selected)]="childTask.isCompleted">
         {{ childTask.name }}
+        <ng-container *ngIf="childTask.dueDate">
+          <span id="dueDate"
+            >({{ childTask.dueDate | date: "YYYY/MM/dd" }})</span
+          >
+        </ng-container>
       </mat-list-option>
     </ng-container>
   </ng-container>
@@ -48,3 +56,4 @@
 >
   <mat-icon>delete</mat-icon>
 </button>
+{{ taskManager.getTasks() }}
