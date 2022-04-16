@@ -5,7 +5,7 @@ import { TodoTask } from './todo-task';
   providedIn: 'root',
 })
 export class TaskManagerService {
-  tasks: TodoTask[];
+  private tasks: TodoTask[];
   constructor() {
     this.tasks = [];
     this.loadTasks();
@@ -98,5 +98,15 @@ export class TaskManagerService {
   deleteTasks() {
     this.tasks = this.tasks.filter((task) => !task.isCompleted);
     this.saveTasks();
+  }
+
+  // インデックスのタスクを設定
+  setIndexOfTask(taskIndex: number, task: TodoTask) {
+    this.tasks[taskIndex] = task;
+  }
+
+  // taskを追加
+  pushTask(task: TodoTask) {
+    this.tasks.push(task);
   }
 }

@@ -58,9 +58,9 @@ export class CsvImportComponent implements OnInit {
         }
         let taskIndex = this.getIndexTasks(task.name);
         if (taskIndex != -1) {
-          this.taskManager.tasks[taskIndex] = task;
+          this.taskManager.setIndexOfTask(taskIndex, task);
         } else {
-          this.taskManager.tasks.push(task);
+          this.taskManager.pushTask(task);
         }
       }
       this.taskManager.saveTasks();
@@ -75,7 +75,7 @@ export class CsvImportComponent implements OnInit {
   // 存在しない場合は-1を返す
   getIndexTasks(taskName: string) {
     let index = 0;
-    for (let task of this.taskManager.tasks) {
+    for (let task of this.taskManager.getTasks()) {
       if (task.name == taskName) {
         return index;
       }

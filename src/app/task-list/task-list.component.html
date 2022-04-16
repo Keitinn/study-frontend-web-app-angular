@@ -2,12 +2,11 @@
   {{ taskManager.getNumOfCompletedTasks() }} /
   {{ taskManager.getTasks().length }} 件
 </p>
-<mat-selection-list>
+<mat-selection-list (selectionChange)="this.taskManager.saveTasks()">
   <ng-container *ngFor="let task of taskManager.getTasks()">
     <mat-list-option
       *ngIf="!task.parentTaskName"
       [(selected)]="task.isCompleted"
-      (selectedChange)="taskManager.saveTasks()"
     >
       {{ task.name }}
       <div>
@@ -27,11 +26,13 @@
         </button>
       </div>
     </mat-list-option>
-    <mat-list-option
+    <ng-container
       *ngFor="let childTask of taskManager.getChildTasks(task.name)"
     >
-      {{ childTask.name }}
-    </mat-list-option>
+      <mat-list-option [(selected)]="childTask.isCompleted">
+        {{ childTask.name }}
+      </mat-list-option>
+    </ng-container>
   </ng-container>
 </mat-selection-list>
 

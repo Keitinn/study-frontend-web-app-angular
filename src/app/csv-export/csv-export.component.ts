@@ -16,7 +16,7 @@ export class CsvExportComponent implements OnInit {
   ngOnInit(): void {}
   csvExport() {
     // タスクが登録されていない場合、警告を出す
-    if (this.taskManager.tasks.length == 0) {
+    if (this.taskManager.getTasks().length == 0) {
       alert('出力するタスクがありません。');
       return;
     }
@@ -24,7 +24,7 @@ export class CsvExportComponent implements OnInit {
     let outputString = 'タスク名,進捗状況\n';
     const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
 
-    for (let task of this.taskManager.tasks) {
+    for (let task of this.taskManager.getTasks()) {
       let completedString = '';
       if (task.isCompleted) {
         completedString = '済';
