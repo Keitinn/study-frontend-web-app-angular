@@ -10,6 +10,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { CsvImportComponent } from './csv-import/csv-import.component';
 import { CsvExportComponent } from './csv-export/csv-export.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,12 @@ import { CsvExportComponent } from './csv-export/csv-export.component';
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'ja-JP',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -37,15 +37,15 @@ export class TaskEditComponent implements OnInit, AfterViewInit {
       ?.toString();
   }
 
-  saveTask(taskName: string) {
+  saveTask(taskName: string, dueDate?: string) {
     if (this.editTaskName) {
-      this.taskManager.updateTask(this.editTaskName, taskName);
+      this.taskManager.updateTask(this.editTaskName, taskName, dueDate);
       this.router.navigate(['']);
     } else if (this.parentTaskName) {
-      this.taskManager.addChildTask(this.parentTaskName, taskName);
+      this.taskManager.addChildTask(this.parentTaskName, taskName, dueDate);
       this.router.navigate(['']);
     } else {
-      if (this.taskManager.addTask(taskName)) {
+      if (this.taskManager.addTask(taskName, dueDate)) {
         this.router.navigate(['']);
       }
     }

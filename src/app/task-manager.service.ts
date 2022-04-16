@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 import { TodoTask } from './todo-task';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class TaskManagerService {
     this.loadTasks();
   }
 
-  addTask(taskName: string): boolean {
+  addTask(taskName: string, dueDate?: string): boolean {
     if (!taskName) {
       alert('タスク名が設定されていません。');
       return false;
@@ -28,6 +29,7 @@ export class TaskManagerService {
       name: taskName,
       isCompleted: false,
       parentTaskName: '',
+      dueDate: dueDate ? new Date(dueDate) : undefined,
     });
     this.saveTasks();
     return true;
@@ -60,10 +62,11 @@ export class TaskManagerService {
   }
 
   // タスクを更新する
-  updateTask(taskName: string, newName: string) {
+  updateTask(taskName: string, newName: string, dueDate?: string) {
     for (let task of this.tasks) {
       if (task.name == taskName) {
         task.name = newName;
+        task.dueDate = dueDate ? new Date(dueDate) : undefined;
         break;
       }
     }
@@ -71,7 +74,11 @@ export class TaskManagerService {
   }
 
   // 子タスクを追加する
-  addChildTask(parentTaskName: string, childTaskName: string) {
+  addChildTask(
+    parentTaskName: string,
+    childTaskName: string,
+    dueDate?: string
+  ) {
     if (!childTaskName) {
       alert('タスク名が設定されていません。');
       return;
@@ -80,6 +87,7 @@ export class TaskManagerService {
       name: childTaskName,
       isCompleted: false,
       parentTaskName: parentTaskName,
+      dueDate: dueDate ? new Date(dueDate) : undefined,
     });
   }
 
