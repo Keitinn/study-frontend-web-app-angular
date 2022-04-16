@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -19,10 +20,13 @@ export class TaskEditComponent implements OnInit, AfterViewInit {
   constructor(
     public taskManager: TaskManagerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
   ngAfterViewInit(): void {
     this.addTaskNameInput.nativeElement.focus();
+    // Angularに強制的に変更検出させる
+    this.changeDetectorRef.detectChanges();
   }
 
   editTaskName: string | undefined = undefined;
